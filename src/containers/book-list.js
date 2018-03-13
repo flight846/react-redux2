@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+// make this into a react-redux containers
+import { connect } from 'react-redux';
 
-export default class BookList extends Component {
+
+class BookList extends Component {
     renderList() {
         return this.props.books.map((book) => {
             return (
@@ -19,3 +22,15 @@ export default class BookList extends Component {
         )
     }
 }
+
+// use of react-redux connect
+function mapStateToProps(state) {
+    // whatever is returned here will show up as props inside BookList
+    return {
+        // array of books from reducer_books
+        books: state.books
+    }
+}
+
+// export only containers => react redux components with states
+export default connect(mapStateToProps)(BookList);
